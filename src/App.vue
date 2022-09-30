@@ -1,29 +1,41 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view />
+  <div>
+    <div class="bg-secondary shadow">
+      <nav class="navbar px-2 container">
+        <router-link class="d-flex btn" to="/">
+          <div class="d-none d-sm-flex header-title flex-column justify-content-center">
+            <b>spot2gether</b>
+            <div>music connects</div>
+          </div>
+        </router-link>
+        <div>
+          <router-link
+            v-if="!$api.isAuthorized()"
+            to="/auth"
+            class="btn btn-outline-dark"
+          >
+            login
+          </router-link>
+        </div>
+      </nav>
+    </div>
+    <div class="container my-5">
+      <main>
+        <router-view />
+      </main>
+    </div>
+  </div>
 </template>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+@import "main.scss";
 
 nav {
-  padding: 30px;
-
   a {
     font-weight: bold;
-    color: #2c3e50;
 
     &.router-link-exact-active {
-      color: #42b983;
+      text-decoration: underline;
     }
   }
 }

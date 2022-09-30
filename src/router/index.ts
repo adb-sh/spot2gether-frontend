@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import { auth } from "@/middlewares/auth";
+import HomeView from "../views/HomePage.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -8,19 +9,43 @@ const routes: Array<RouteRecordRaw> = [
     component: HomeView,
   },
   {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    path: "/connect",
+    name: "connect",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+      import(/* webpackChunkName: "connect" */ "../views/ConnectPage.vue"),
+    meta: {
+      requireAuth: true,
+    },
+  },
+  {
+    path: "/user/:id",
+    name: "user",
+    component: () =>
+      import(/* webpackChunkName: "user" */ "../views/UserPage.vue"),
+  },
+  {
+    path: "/auth",
+    name: "auth",
+    component: () =>
+      import(/* webpackChunkName: "auth" */ "../views/AuthPage.vue"),
+  },
+  {
+    path: "/auth/callback",
+    name: "authCallback",
+    component: () =>
+      import(/* webpackChunkName: "auth" */ "../views/AuthCallbackPage.vue"),
   },
 ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+});
+
+router.beforeEach(async (to, from, next) => {
+  if (!to.name) next("/");
+  else if (to.meta?.requireAuth) auth({ to, from, next, router });
+  else next();
 });
 
 export default router;

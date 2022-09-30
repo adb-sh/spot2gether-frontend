@@ -1,0 +1,14 @@
+@import "bootstrap/scss/bootstrap.scss";
+//@import "bootstrap-darkmode/scss/darktheme.scss";
+
+html, body {
+  //background-color: $dark-body-bg;
+  line-break: loose;
+  word-break: break-word;
+}
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
