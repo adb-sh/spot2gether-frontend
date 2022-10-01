@@ -10,7 +10,9 @@ defineProps({
   <div class="currentlyPlaying card">
     <div class="card-header">
       <b>{{ currentlyPlaying.item.name }}</b>
-      {{ currentlyPlaying.item.artists.map(artist => artist.name).join(', ') }}
+      <div>
+        {{ currentlyPlaying.item.artists.map(artist => artist.name).join(', ') }}
+      </div>
     </div>
     <div class="card-body">
       <div class="row">
@@ -36,7 +38,7 @@ defineProps({
               rel="noopener norefferrer"
               class="btn btn-outline-dark m-1"
             >
-              view playlist on Spotify
+              view {{ currentlyPlaying.context.type }} on Spotify
             </a>
           </p>
         </div>

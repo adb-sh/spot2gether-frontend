@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps } from "vue";
+import { ref, defineProps, watch } from "vue";
 import ThrobberLoading from "@/components/ThrobberLoading.vue";
 
 const props = defineProps({
@@ -37,6 +37,10 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  throbber: {
+    type: Boolean,
+    default: true,
+  }
 });
 
 const loading = ref(true);
@@ -46,9 +50,9 @@ const data = ref(null);
 
 const update = async (promise: Promise | unknown) => {
   loading.value = true;
-  setTimeout(() => {
+  if (props.throbber) setTimeout(() => {
     if (loading.value) showThrobber.value = true;
-  }, 100);
+  }, 250);
   try {
     data.value = await (promise.isPromiseList
       ? Promise.all(promise.promises)
@@ -57,9 +61,14 @@ const update = async (promise: Promise | unknown) => {
     error.value = e;
   } finally {
     loading.value = false;
+    showThrobber.value = false;
   }
 };
 update(props.promise);
+
+watch(() => props.promise, (to) => {
+  update(to);
+});
 </script>
 
 <style scoped lang="scss">

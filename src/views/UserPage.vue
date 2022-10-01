@@ -2,14 +2,27 @@
 import PromiseResolver from "@/components/PromiseResolver.vue";
 import CurrentlyPlaying from "@/components/CurrentlyPlaying.vue";
 import { useRoute } from "vue-router";
+import { onBeforeUnmount, ref } from "vue";
+import { useApi } from "@/Api";
 
 const route = useRoute();
+const api = useApi();
+
+const userInfo = ref(api?.getUserInfo(route.params.id as string));
+
+let refreshUserInfo = setInterval(() => {
+  userInfo.value = api?.getUserInfo(route.params.id as string);
+}, 20000);
+
+onBeforeUnmount(() => {
+  clearInterval(refreshUserInfo);
+});
 </script>
 
 <template>
   <h1>User</h1>
   <PromiseResolver
-    :promise="$api.getUserInfo($route.params.id)"
+    :promise="userInfo"
     v-slot="{ data: { user, currentlyPlaying } }"
     class="row"
   >
