@@ -1,6 +1,4 @@
 <script setup>
-import querystring from "querystring";
-
 const randomString = (length) => {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';
@@ -9,15 +7,16 @@ const randomString = (length) => {
   return result;
 }
 
-const authUrl = 'https://accounts.spotify.com/authorize?' + querystring.stringify({
-  response_type: 'code',
-  // eslint-disable-next-line
-  client_id: process.env.VUE_APP_SPOTIFY_CLIENT_ID,
-  // eslint-disable-next-line
-  redirect_uri: process.env.VUE_APP_SPOTIFY_REDIRECT_URI,
-  scope: 'user-read-email app-remote-control user-read-playback-state user-read-currently-playing user-modify-playback-state',
-  state: randomString(16),
-});
+const params = new URLSearchParams();
+params.append('response_type', 'code');
+// eslint-disable-next-line
+params.append('client_id', process.env.VUE_APP_SPOTIFY_CLIENT_ID);
+// eslint-disable-next-line
+params.append('redirect_uri', process.env.VUE_APP_SPOTIFY_REDIRECT_URI);
+params.append('scope', 'user-read-email app-remote-control user-read-playback-state user-read-currently-playing user-modify-playback-state');
+params.append('state', randomString(16));
+
+const authUrl = 'https://accounts.spotify.com/authorize?' + params.toString();
 </script>
 
 <template>

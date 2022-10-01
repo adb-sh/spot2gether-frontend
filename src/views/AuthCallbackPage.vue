@@ -7,7 +7,10 @@ import PromiseResolver from "@/components/PromiseResolver.vue";
     <h1>Connect to Spotify</h1>
     <div class="card">
       <div class="card-body">
-        <PromiseResolver :promise="$api.auth({ code, state })">
+        <PromiseResolver :promise="$api.auth({
+          code: $route.query.code,
+          state: $route.query.state,
+        })">
           <div class="alert alert-success">
             Authorization completed
           </div>
