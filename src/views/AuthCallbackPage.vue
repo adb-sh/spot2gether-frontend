@@ -1,5 +1,8 @@
-<script setup>
+<script setup lang="ts">
 import PromiseResolver from "@/components/PromiseResolver.vue";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
 </script>
 
 <template>
@@ -8,9 +11,10 @@ import PromiseResolver from "@/components/PromiseResolver.vue";
     <div class="card">
       <div class="card-body">
         <PromiseResolver :promise="$api.auth({
-          code: $route.query.code,
-          state: $route.query.state,
+          code: route.query.code,
+          state: route.query.state,
         })">
+          {{ $route.query }}
           <div class="alert alert-success">
             Authorization completed
           </div>

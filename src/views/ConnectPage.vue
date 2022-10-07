@@ -42,10 +42,11 @@ const route = useRoute();
       <div class="card-body">
         <PromiseResolver
           :promise="$api.getCurrentlyPlaying()"
-          v-slot="{ data: { currentlyPlaying }, update }"
+          v-slot="{ data, update }"
           class="col-md-4"
         >
-          <CurrentlyPlaying :currently-playing="currentlyPlaying" />
+          {{ data }}
+          <CurrentlyPlaying v-if="data.currentlyPlaying" :currentlyPlaying="data.currentlyPlaying" />
           <button @click="update($api.getCurrentlyPlaying())" class="btn btn-secondary">update</button>
         </PromiseResolver>
       </div>
