@@ -3,7 +3,7 @@
     <div class="bg-secondary shadow">
       <nav class="navbar px-2 container">
         <router-link class="d-flex btn" to="/">
-          <div class="d-none d-sm-flex header-title flex-column justify-content-center">
+          <div class="d-flex header-title flex-column justify-content-center">
             <b>spot2gether</b>
             <div>music connects</div>
           </div>

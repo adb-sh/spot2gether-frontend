@@ -32,7 +32,14 @@ onBeforeUnmount(() => {
           {{ user.displayName }}
         </div>
         <div class="card-body">
-          <img :src="user.images[0].url" alt="user image" class="card-img">
+          <div class="row">
+            <div class="col-4">
+              <img :src="user.images[0].url" alt="user image" class="card-img">
+            </div>
+            <div class="col">
+              <p>{{ user.totalFollowers }} followers on Spotify</p>
+            </div>
+          </div>
         </div>
       </div>
       <button
