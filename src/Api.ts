@@ -63,11 +63,11 @@ export class Api {
     return (await this.axiosPublic.get(`/users/${userId}/info`))?.data;
   }
 
-  async joinSession(userId: string) {
-    return (await this.axios.post(`/user/joinSession`, { userId }))?.data;
+  async joinSession(hostId: string) {
+    return (await this.axios.post(`/session/join`, { hostId }))?.data;
   }
-  async leaveSession(userId: string) {
-    return (await this.axios.post(`/user/leaveSession`, { userId }))?.data;
+  async leaveSession(hostId: string) {
+    return (await this.axios.post(`/session/session`, { hostId }))?.data;
   }
 }
 
