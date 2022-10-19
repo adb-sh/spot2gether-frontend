@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div v-if="$route.meta.allowEmbed && $route.query.embed === 'true'" class="p-2">
+    <router-view />
+  </div>
+  <div v-else>
     <div class="bg-secondary shadow">
       <nav class="navbar px-2 container">
         <router-link class="d-flex btn" to="/">

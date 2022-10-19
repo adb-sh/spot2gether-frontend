@@ -59,6 +59,7 @@ const update = async (promise: Promise | unknown) => {
       : promise);
   } catch (e) {
     error.value = e;
+    console.error('PR', e);
   } finally {
     loading.value = false;
     showThrobber.value = false;

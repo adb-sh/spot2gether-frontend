@@ -21,7 +21,11 @@ export class Api {
     this.baseURL = baseURL;
     this.authBaseURL = authBaseURL;
     this.publicBaseURL = publicBaseURL;
-    this.accessToken = accessToken ?? localStorage.getItem("access-token");
+    try{
+      this.accessToken = accessToken ?? localStorage?.getItem("access-token");
+    } catch (e) {
+      this.accessToken = null;
+    }
     this.axios = axios.create({ baseURL });
     this.axios.interceptors.request.use(({ headers = {}, ...config }) => ({
       ...config,
@@ -63,11 +67,20 @@ export class Api {
     return (await this.axiosPublic.get(`/users/${userId}/info`))?.data;
   }
 
+  async getSession() {
+    return (await this.axios.get(`/session`))?.data;
+  }
+  async createSession() {
+    return (await this.axios.post(`/session`))?.data;
+  }
+  async deleteSession() {
+    return (await this.axios.delete(`/session`))?.data;
+  }
   async joinSession(hostId: string) {
     return (await this.axios.post(`/session/join`, { hostId }))?.data;
   }
-  async leaveSession(hostId: string) {
-    return (await this.axios.post(`/session/session`, { hostId }))?.data;
+  async leaveSession() {
+    return (await this.axios.post(`/session/leave`))?.data;
   }
 }
 

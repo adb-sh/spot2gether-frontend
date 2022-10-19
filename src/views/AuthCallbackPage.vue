@@ -14,7 +14,6 @@ const route = useRoute();
           code: route.query.code,
           state: route.query.state,
         })">
-          {{ $route.query }}
           <div class="alert alert-success">
             Authorization completed
           </div>

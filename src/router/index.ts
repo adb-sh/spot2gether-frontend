@@ -18,8 +18,20 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    path: "/me",
+    name: "me",
+    component: () =>
+      import(/* webpackChunkName: "me" */ "../views/MePage.vue"),
+    meta: {
+      requireAuth: false,
+    },
+  },
+  {
     path: "/user/:id",
     name: "user",
+    meta: {
+      allowEmbed: true,
+    },
     component: () =>
       import(/* webpackChunkName: "user" */ "../views/UserPage.vue"),
   },
@@ -33,7 +45,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/auth/callback",
     name: "authCallback",
     component: () =>
-      import(/* webpackChunkName: "auth" */ "../views/AuthCallbackPage.vue"),
+      import(/* webpackChunkName: "authCallback" */ "../views/AuthCallbackPage.vue"),
   },
 ];
 
