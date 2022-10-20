@@ -1,9 +1,13 @@
+<script setup lang="ts">
+import DarkModeToggle from "@/components/DarkmodeToggle.vue";
+</script>
+
 <template>
   <div v-if="$route.meta.allowEmbed && $route.query.embed === 'true'" class="p-2">
     <router-view />
   </div>
   <div v-else>
-    <div class="bg-secondary shadow">
+    <div class="bg-darkmode-dark bg-light shadow sticky-top">
       <nav class="navbar px-2 container">
         <router-link class="d-flex btn" to="/">
           <div class="d-flex header-title flex-column justify-content-center">
@@ -11,14 +15,18 @@
             <div>music connects</div>
           </div>
         </router-link>
-        <div>
+        <div class="d-flex align-items-center">
           <router-link
             v-if="!$api.isAuthorized()"
             to="/auth"
-            class="btn btn-outline-dark"
+            class="btn btn-outline"
           >
             login
           </router-link>
+          <DarkModeToggle class="mx-2" v-slot="{ state }">
+            <i v-if="state" class="bi-moon"></i>
+            <i v-else class="bi-sun"></i>
+          </DarkModeToggle>
         </div>
       </nav>
     </div>
@@ -31,8 +39,6 @@
 </template>
 
 <style lang="scss">
-@import "main.scss";
-
 nav {
   a {
     font-weight: bold;

@@ -1,8 +1,7 @@
-@import "bootstrap/scss/bootstrap.scss";
-//@import "bootstrap-darkmode/scss/darktheme.scss";
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../node_modules/bootstrap-darkmode/scss/darktheme.scss";
 
 html, body {
-  //background-color: $dark-body-bg;
   line-break: loose;
   word-break: break-word;
 }

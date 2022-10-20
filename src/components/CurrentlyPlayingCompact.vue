@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { defineProps } from "vue";
+import TrackProgressBar from "@/components/TrackProgressBar.vue";
 
 defineProps({
   currentlyPlaying: Object,
@@ -18,6 +19,11 @@ defineProps({
           <div>
             {{ currentlyPlaying?.item.artists.map(artist => artist.name).join(', ') }}
           </div>
+          <TrackProgressBar
+            :duration="currentlyPlaying?.item.duration"
+            :progress="currentlyPlaying.progress"
+            :isPlaying="currentlyPlaying.isPlaying"
+          />
         </div>
       </div>
     </div>

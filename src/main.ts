@@ -3,6 +3,12 @@ import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./router";
 import { createApi } from "@/Api";
+import 'bootstrap-icons/font/bootstrap-icons.scss';
+import './main.scss';
+import { ThemeConfig } from 'bootstrap-darkmode';
+
+export const themeConfig = new ThemeConfig();
+themeConfig.initTheme();
 
 createApp(App)
   .use(router)

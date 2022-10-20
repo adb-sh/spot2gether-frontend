@@ -13,7 +13,7 @@ const userInfo = ref(api?.getUserInfo(route.params.id as string));
 
 let refreshUserInfo = setInterval(() => {
   userInfo.value = api?.getUserInfo(route.params.id as string);
-}, 20000);
+}, 10000);
 
 onBeforeUnmount(() => {
   clearInterval(refreshUserInfo);
@@ -43,10 +43,7 @@ onBeforeUnmount(() => {
       v-slot="{ data: { user, currentlyPlaying } }"
       class="row"
     >
-      <div v-if="$route.query.embed === 'true'">
-
-      </div>
-      <div v-else class="col-md-4">
+      <div class="col-md-4">
         <div class="card">
           <div class="card-header">
             {{ user.displayName }}
@@ -80,6 +77,9 @@ onBeforeUnmount(() => {
       <div class="col">
         <h2>Currently listening to:</h2>
         <CurrentlyPlaying v-if="currentlyPlaying?.item" :currently-playing="currentlyPlaying" />
+        <p v-else class="alert alert-info">
+          {{ user.displayName }} is not listening to music.
+        </p>
       </div>
     </PromiseResolver>
   </div>

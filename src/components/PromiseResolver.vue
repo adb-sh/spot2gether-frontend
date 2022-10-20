@@ -52,14 +52,13 @@ const update = async (promise: Promise | unknown) => {
   loading.value = true;
   if (props.throbber) setTimeout(() => {
     if (loading.value) showThrobber.value = true;
-  }, 250);
+  }, 500);
   try {
     data.value = await (promise.isPromiseList
       ? Promise.all(promise.promises)
       : promise);
   } catch (e) {
     error.value = e;
-    console.error('PR', e);
   } finally {
     loading.value = false;
     showThrobber.value = false;
