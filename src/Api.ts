@@ -57,10 +57,10 @@ export class Api {
     return (await this.axios.get(`/test`))?.data;
   }
   async getRole() {
-    return (await this.axios.get(`/user/role`))?.data;
+    return (await this.axios.get(`/me/role`))?.data;
   }
   async getCurrentlyPlaying() {
-    return (await this.axios.get(`/user/currentlyPlaying`))?.data;
+    return (await this.axios.get(`/me/currentlyPlaying`))?.data;
   }
 
   async getUserInfo(userId: string) {

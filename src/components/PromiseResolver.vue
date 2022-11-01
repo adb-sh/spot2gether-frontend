@@ -8,18 +8,26 @@
       :data="getter(data)"
       :update="update"
     />
-    <slot v-if="error" name="error">
+    <slot
+      v-if="error"
+      name="error"
+      :error="error"
+      :update="update"
+    >
       <div class="alert alert-danger">
         {{ error.message || 'Oops! Something went wrong :/' }}
       </div>
     </slot>
-    <slot v-else-if="loading && showThrobber" name="loading">
-      <div class="overlay">
-        <div class="wrapper">
-          <ThrobberLoading />
+    <transition name="fade">
+      <slot v-if="loading && showThrobber" name="loading">
+        <div class="overlay">
+          <div class="wrapper">
+            <div class="background bg-darkmode-dark bg-light" />
+            <ThrobberLoading class="position-relative" />
+          </div>
         </div>
-      </div>
-    </slot>
+      </slot>
+    </transition>
   </div>
 </template>
 
@@ -57,6 +65,7 @@ const update = async (promise: Promise | unknown) => {
     data.value = await (promise.isPromiseList
       ? Promise.all(promise.promises)
       : promise);
+    error.value = null;
   } catch (e) {
     error.value = e;
   } finally {
@@ -83,8 +92,6 @@ watch(() => props.promise, (to) => {
     width: 100%;
     height: 100%;
     min-height: 5rem;
-    background-color: #fffd;
-    z-index: 9000;
     .wrapper {
       position: sticky;
       display: flex;
@@ -93,6 +100,14 @@ watch(() => props.promise, (to) => {
       top: 0;
       height: 100%;
       max-height: 100vh;
+      .background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        opacity: 0.9;
+      }
     }
   }
 }

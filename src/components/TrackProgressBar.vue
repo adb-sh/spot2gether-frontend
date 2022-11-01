@@ -30,13 +30,17 @@ onBeforeUnmount(() => {
         class="progress-bar"
         role="progressbar"
         :style="{
-          width: `${ estimatedProgress / duration * 100 }%`
+          width: `${ Math.min(estimatedProgress / duration, 1) * 100 }%`
         }"
       />
     </div>
     <div class="row my-2">
       <div class="col">
-        <TimeFormatter :seconds="estimatedProgress / 1000"/>
+        <TimeFormatter
+          :seconds="
+            Math.min(estimatedProgress, duration) / 1000
+          "
+        />
       </div>
       <div class="col-auto">
         <TimeFormatter :seconds="duration / 1000"/>

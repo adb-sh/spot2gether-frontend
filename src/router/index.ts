@@ -23,7 +23,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(/* webpackChunkName: "me" */ "../views/MePage.vue"),
     meta: {
-      requireAuth: false,
+      requireAuth: true,
     },
   },
   {

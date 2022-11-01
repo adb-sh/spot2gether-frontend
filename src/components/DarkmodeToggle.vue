@@ -11,7 +11,10 @@
 import { ref, watch } from 'vue';
 import { themeConfig } from '@/main';
 
-const sliderState = ref(themeConfig.getTheme() === 'dark');
+let currentTheme;
+currentTheme = themeConfig.getTheme() === 'dark'
+
+const sliderState = ref(currentTheme);
 
 watch(sliderState, (state) => {
   themeConfig.setTheme(state ? 'dark' : 'light');
