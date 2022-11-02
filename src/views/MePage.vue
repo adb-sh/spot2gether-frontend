@@ -41,13 +41,24 @@ onBeforeUnmount(() => {
           </div>
           <div class="card-body">
             <b>Host</b>
-            <div>
-              {{ session.host?.spotify.userId }}
+            <div class="my-2">
+              <img :src="session.host.images[0].url" :alt="session.host.displayName" :title="session.host.displayName" class="rounded-circle userThumbnail">
             </div>
             <b>Clients</b>
-            <div>
-              <div v-for="client in session.clients" :key="client">
-                {{ client.displayName }}
+            <div class="row">
+              <div
+                v-for="client in session.clients"
+                :key="client"
+                class="col-auto"
+              >
+                <img
+                  v-if="client.images[0]?.src"
+                  :src="client.images[0]?.src"
+                  :alt="client.displayName"
+                  :title="client.displayName"
+                  class="userThumbnail rounded-circle"
+                />
+                <i class="bi-person-circle userThumbnail" :title="client.displayName"/>
               </div>
             </div>
           </div>
@@ -70,7 +81,7 @@ onBeforeUnmount(() => {
       <template #error="{ error, update }">
         <div v-if="error.response.status === 404">
           <div class="alert alert-info">
-            You are not part of a session.
+            You are not part of any session.
           </div>
           <button
             @click="$api.createSession().then(() => update($api.getSession()))"
@@ -84,4 +95,9 @@ onBeforeUnmount(() => {
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.userThumbnail {
+  height: 2rem;
+  font-size: 2rem;
+}
+</style>
