@@ -17,8 +17,8 @@ const route = useRoute();
           <div class="alert alert-success">
             Authorization completed
           </div>
-          <router-link to="/connect" class="btn btn-primary">
-            Join a Session
+          <router-link to="/me" class="btn btn-primary">
+            Go to my Profile
           </router-link>
         </PromiseResolver>
       </div>

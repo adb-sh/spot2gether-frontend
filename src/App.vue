@@ -23,9 +23,16 @@ import DarkModeToggle from "@/components/DarkmodeToggle.vue";
           >
             login
           </router-link>
+          <router-link
+            v-if="$api.isAuthorized()"
+            to="/me"
+            class="btn btn-outline"
+          >
+            me
+          </router-link>
           <DarkModeToggle class="mx-2" v-slot="{ state }">
-            <i v-if="state" class="bi-moon"></i>
-            <i v-else class="bi-sun"></i>
+            <i v-if="state" class="bi-moon"/>
+            <i v-else class="bi-sun"/>
           </DarkModeToggle>
         </div>
       </nav>
@@ -42,7 +49,6 @@ import DarkModeToggle from "@/components/DarkmodeToggle.vue";
 nav {
   a {
     font-weight: bold;
-
     &.router-link-exact-active {
       text-decoration: underline;
     }

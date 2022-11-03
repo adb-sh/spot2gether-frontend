@@ -9,15 +9,6 @@ const routes: Array<RouteRecordRaw> = [
     component: HomeView,
   },
   {
-    path: "/connect",
-    name: "connect",
-    component: () =>
-      import(/* webpackChunkName: "connect" */ "../views/ConnectPage.vue"),
-    meta: {
-      requireAuth: true,
-    },
-  },
-  {
     path: "/me",
     name: "me",
     component: () =>
